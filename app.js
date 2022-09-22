@@ -6,9 +6,10 @@ const ExpressError = require('./expressError');
 app.use(express.json());
 
 // const uRoutes = require('./routes/users');
-const uRoutes = require('./routes');
+// const uRoutes = require('./routes');
+const uRoutes = require('./users');
 
-app.use('/users', uRoutes); // all routes will now start with /users. See users.js file for the users route
+app.use("/users", uRoutes); // all routes will now start with /users. See users.js file for the users route
 
 // 404 erorr handler
 
@@ -28,4 +29,9 @@ app.use(function (err, req, res, next){
             status: status
         }
     })
+})
+
+// start the server
+app.listen(3000, function(){
+    console.log('Server Started on port 3000');
 })

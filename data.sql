@@ -1,12 +1,12 @@
 -- data base sql statements and creating the table
 
-DROP DATABASE IF EXISTS users_db;
-CREATE DATABASE users_db;
+DROP DATABASE IF EXISTS usersdb;
+CREATE DATABASE usersdb;
 
-\c users_db;
+\c usersdb;
 
 DROP TABLE IF EXISTS users;
-CREATE TABTLE users(
+CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     name text NOT NULL,
     type text NOT NULL
