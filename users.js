@@ -20,16 +20,43 @@ const db = require("./db");
 
 // Error handling. Eg database table does not exist
 
-router.get('/', async (req, res, next) => {
-    // get all users from the database
+// router.get('/', async (req, res, next) => {
+//     // get all users from the database
+//     try{
+//         let result = await db.query(`SELECT * FROM userskjflajdflkajdflasd`);
+//         // return res.json(result); OR 
+//         return res.json(result.rows);
+//     } catch(e){
+//         return next(e)
+//     }
+// })
+
+// with query string
+
+// router.get('/search', async (req, res, next) => {
+//     try{
+//         const { type } = req.query;
+//         const result = await db.query(`SELECT * FROM users WHERE type='${type}'`)
+//         return res.json(result.rows)
+
+//     }catch(e){
+//         return next(e)
+//     }
+// })
+
+
+//  Parameterized queries to avoid sql attack in the above code
+
+router.get('/search', async (req, res, next) => {
     try{
-        let result = await db.query(`SELECT * FROM userskjflajdflkajdflasd`);
-        // return res.json(result); OR 
-        return res.json(result.rows);
-    } catch(e){
+        const { type } = req.query;
+        // const result = await db.query(`SELECT * FROM users WHERE type='${type}'`)
+        const result = await db.query(`SELECT * FROM users WHERE type=$1`, [type])
+        return res.json(result.rows)
+
+    }catch(e){
         return next(e)
     }
 })
-
 
 module.exports = router;
